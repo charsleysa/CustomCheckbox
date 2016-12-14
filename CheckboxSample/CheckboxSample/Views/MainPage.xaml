@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CheckboxSample"
+             xmlns:components="clr-namespace:CheckboxSample.Components"
+             xmlns:ViewModel="clr-namespace:CheckboxSample.ViewModels"
+             x:Class="CheckboxSample.MainPage">
+  <StackLayout>
+    <ListView 
+      ItemsSource="{Binding Users}"
+      VerticalOptions="Center"
+      HorizontalOptions="Center">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+              </Grid.RowDefinitions>
+              <Label
+                Grid.Column="0"
+                Text="{Binding UserName}">
+              </Label>
+              <components:CustomCheckbox
+                Grid.Column="1"
+                IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                BindableObject="{Binding OpenId}"
+                BackgroundColor="White"
+							  Color="#C6C6C6">
+              </components:CustomCheckbox>
+          </Grid>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+    <Button
+      Text="Select all"
+      Command="{Binding AllCommand}">
+    </Button>
+  </StackLayout>
+</ContentPage>
