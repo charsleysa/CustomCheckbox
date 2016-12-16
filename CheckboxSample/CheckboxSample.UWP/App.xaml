@@ -4,5 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CheckboxSample.UWP"
     RequestedTheme="Light">
+    <Application.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="CheckBoxCell">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Text}" VerticalAlignment="Center" Style="{ThemeResource BaseTextBlockStyle}" />
+                    <CheckBox Grid.Column="1" IsChecked="{Binding IsChecked, Mode=TwoWay}" VerticalAlignment="Center" />
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
 
 </Application>

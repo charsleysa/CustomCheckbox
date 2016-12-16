@@ -7,60 +7,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Xamarin.Forms.Platform.UWP;
+using WDataTemplate = Windows.UI.Xaml.DataTemplate;
+using WApplication = Windows.UI.Xaml.Application;
+using Xamarin.Forms;
 
-[assembly: ExportRenderer(typeof(CustomCheckbox), typeof(CustomCheckboxRenderer))]
+[assembly: ExportCell(typeof(CheckBoxCell), typeof(CheckBoxCellRenderer))]
 namespace CheckboxSample.UWP.Renderer
 {
-    public class CustomCheckboxRenderer : ViewRenderer<CustomCheckbox, CheckBox>
+    public class CheckBoxCellRenderer : ICellRenderer
     {
-        private CheckBox nativeCheckbox;
-
-        public CustomCheckboxRenderer()
+        public virtual WDataTemplate GetTemplate(Cell cell)
         {
-        }
-
-        protected override void OnElementChanged(ElementChangedEventArgs<CustomCheckbox> e)
-        {
-            base.OnElementChanged(e);
-            var model = e.NewElement;
-            if (model == null)
-            {
-                return;
-            }
-
-            nativeCheckbox = new CheckBox();
-            CheckboxPropertyChanged(model, null);
-            model.PropertyChanged += OnElementPropertyChanged;
-
-            nativeCheckbox.Checked += (object sender, Windows.UI.Xaml.RoutedEventArgs eargs) =>
-            {
-                model.IsChecked = (bool)nativeCheckbox.IsChecked;
-            };
-
-            nativeCheckbox.Unchecked += (object sender, Windows.UI.Xaml.RoutedEventArgs eargs) =>
-            {
-                model.IsChecked = (bool)nativeCheckbox.IsChecked;
-            };
-
-            SetNativeControl(nativeCheckbox);
-        }
-
-        private void CheckboxPropertyChanged(CustomCheckbox model, string propertyName)
-        {
-            if (propertyName == null || propertyName == CustomCheckbox.IsCheckedProperty.PropertyName)
-            {
-                nativeCheckbox.IsChecked = model.IsChecked;
-            }
-        }
-
-        protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (nativeCheckbox != null)
-            {
-                base.OnElementPropertyChanged(sender, e);
-
-                CheckboxPropertyChanged((CustomCheckbox)sender, e.PropertyName);
-            }
+            return (WDataTemplate)WApplication.Current.Resources["CheckBoxCell"];
         }
     }
 }

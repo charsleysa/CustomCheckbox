@@ -12,28 +12,7 @@
       HorizontalOptions="Center">
       <ListView.ItemTemplate>
         <DataTemplate>
-          <ViewCell>
-            <Grid>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-              </Grid.ColumnDefinitions>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-              </Grid.RowDefinitions>
-              <Label
-                Grid.Column="0"
-                Text="{Binding UserName}">
-              </Label>
-              <components:CustomCheckbox
-                Grid.Column="1"
-                IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                BindableObject="{Binding OpenId}"
-                BackgroundColor="White"
-							  Color="#C6C6C6">
-              </components:CustomCheckbox>
-          </Grid>
-          </ViewCell>
+          <components:CheckBoxCell Text="{Binding UserName}" IsChecked="{Binding IsSelected, Mode=TwoWay}"></components:CheckBoxCell>
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
